@@ -1,0 +1,136 @@
+<div id="content" #content class="page">
+    <div class="left_side">
+        <div class="upper_round">
+            <h1 contenteditable class="user_name" placeholder="Name..."></h1>
+            <div class="user_img">
+                <img class="img" src="../../assets/img_leave/User Image.png">
+            </div>
+        </div>
+        <div style="padding-left: 3vw;padding-right: 3vw;">
+            <div>
+                <h2>Persoal</h2>
+                <div>
+                    <span style="font-weight: 500;">Email:</span>
+                    <p contenteditable placeholder="Email ID..."></p>
+                </div>
+                <div>
+                    <span style="font-weight: 500;">LinkedIn:</span>
+                    <p contenteditable placeholder="LinkedIn URL..."></p>
+                </div>
+                <div>
+                    <span style="font-weight: 500;">GitHub:</span>
+                    <p contenteditable placeholder="GitHub URL..."></p>
+                </div>
+            </div>
+            <div>
+                <div style="display: flex;flex-direction: row;justify-content: space-between;">
+                    <h2>Interests</h2>
+                    <div *ngIf=button_dis>
+                        <button type="button" (click)="add_more_int()">Add More</button>
+                    </div>
+                </div>
+                <div *ngFor="let data of interest_entries;index as i" style="display: flex;flex-direction: row; align-items: center; justify-content: space-between;">
+                    <div contenteditable style="margin-right: 20px;" placeholder="Interests..."></div>
+                    <button *ngIf=button_dis type="button" (click)="del_int(i)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right_side">
+        <p contenteditable placeholder="Overview..."></p>
+        <hr>
+        <div style="display: flex;flex-direction: row;justify-content: space-between;">
+            <h2>Work experience</h2>
+            <div *ngIf=button_dis>
+                <button type="button" (click)="add_more()">Add More</button>
+            </div>
+        </div>
+        <div *ngFor="let data of number_of_entries">
+            <div class="work_exp_and_work">
+                <div class="work_exp">
+                    <div class="comp_deg_name">
+                        <div style="font-weight: 700;" contenteditable placeholder="designation..."></div>
+                        <div contenteditable placeholder="Compony Name"></div>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <mat-date-range-input [rangePicker]="picker2">
+                              <input matStartDate readonly>
+                              <input matEndDate readonly>
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle *ngIf=button_dis matSuffix [for]="picker2">
+                                <mat-icon matDatepickerToggleIcon>
+                                    <img style="padding-bottom: 5px;" src="../../../../assets/img_leave/Icon awesome-calendar-alt.svg" alt="celender">
+                                </mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-date-range-picker 
+                                #picker2 color="primary"
+                                startView="multi-year"
+                                panelClass="example-month-picker"
+                            ></mat-date-range-picker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div>
+                    <p contenteditable placeholder="Work on Compony..."></p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div style="display: flex;flex-direction: row;justify-content: space-between;">
+            <h2>Education and Qualifications</h2>
+            <div *ngIf=button_dis>
+                <button type="button" (click)="add_more_edu()">Add More</button>
+            </div>
+        </div>
+        <div *ngFor="let data of education_entries">
+            <div class="education">
+                <div class="degree_college">
+                    <div style="font-weight: 700;margin-bottom: 5px;" contenteditable placeholder="Degree Name"></div>
+                    <div contenteditable placeholder="college Name"></div>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-date-range-input [rangePicker]="picker2">
+                          <input matStartDate readonly>
+                          <input matEndDate readonly>
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle *ngIf=button_dis matSuffix [for]="picker2">
+                            <mat-icon matDatepickerToggleIcon>
+                                <img style="padding-bottom: 5px;" src="../../../../assets/img_leave/Icon awesome-calendar-alt.svg" alt="celender">
+                            </mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-date-range-picker 
+                            #picker2 color="primary"
+                            startView="multi-year"
+                            panelClass="example-month-picker"
+                        ></mat-date-range-picker>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h1>Skills</h1>
+        <div *ngFor="let data of star_array;index as ii">
+            <div style="display: flex;flex-direction: row;align-items: center;justify-content: space-between;">
+                <div>{{skill_text[ii]}}</div>
+                <div style="display: flex;flex-direction: row;">
+                    <div *ngFor="let ratingId of data;index as i" (click)="change_rating(ii,i)">
+                        <mat-icon>
+                            {{star_array[ii][i]}}
+                        </mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf=button_dis style="display: flex;justify-content: center;margin-top: 50px;">
+    <button (click)="pdf_generator('content');" type="button" style="padding: 10px;font-weight: 900;">Download PDF</button>
+</div>
+<div *ngIf=(!button_dis) style="display: flex;justify-content: center;margin-top: 50px;">
+    <button (click)="pdf_generator('content');" type="button" style="padding: 10px;font-weight: 900;">Add More Items</button>
+</div>

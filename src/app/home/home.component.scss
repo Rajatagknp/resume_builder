@@ -1,0 +1,97 @@
+
+// *{
+//     border: 0ch;
+//     outline: 0ch;
+// }
+
+button{
+    display: flex;
+    justify-content: flex-end;
+    background-color: blue;
+    border: 0ch;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    margin: 5px 5px 5px 0px;
+}
+
+[contenteditable]:empty:before{
+    content: attr(placeholder);
+    color: blue;
+}
+
+
+
+.page{
+    display: flex;
+    flex-direction: row;
+    .left_side{
+        *{
+            border: 0ch;
+            outline: 0ch;
+        }
+        background-color: #b8b3ae5d;
+        width: 35vw;
+        .upper_round{
+            width: 35vw;
+            height: 100px;
+            background-color: blueviolet;
+            border-bottom-right-radius: 40%;
+            border-bottom-left-radius: 40%;
+            padding-top: 20px;
+            margin-bottom: 60px;
+            border-bottom: 10px solid blue;
+            .user_name{
+                text-align: center;
+                color: white;
+            }
+            .user_img{
+                margin-top: 30px;
+                display: flex;
+                justify-content: center;
+                .img{
+                    border: 5px solid white;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+    .right_side{
+        width: 65vw;
+        padding-left: 5vw;
+        padding-right: 5vw;
+        padding-top: 40px;
+        .work_exp_and_work{
+            *{
+                border: 0ch;
+                outline: 0ch;
+            }
+            margin-top: 20px;
+            margin-bottom: 20px;
+            .work_exp{
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 5px;
+                .comp_deg_name{
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+        }
+        .education{
+            *{
+                border: 0ch;
+                outline: 0ch;
+            }
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            .degree_college{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}
