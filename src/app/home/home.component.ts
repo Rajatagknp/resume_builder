@@ -6,6 +6,10 @@ import {defaultFormat as _rollupMoment} from 'moment';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from "@angular/material-moment-adapter";
 import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from "@angular/material/core";
 
+
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
 const moment = _rollupMoment || _moment;
 
 export const MY_FORMATS = {
@@ -38,10 +42,25 @@ export const MY_FORMATS = {
 
 export class homecomponent implements OnInit{
 
-  skill_text:any[] = ['JavaScript','HTML','nodeJS']
+  // month_array:any[] = ['January','February','March','April','May','June','July','August','September','October','November','December']
+  month_array:any[] = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
+  year_array:any[] = []
+  skill_text:any[] = [0]
   star_array:any = []
 
+  add_more_skill(){
+    this.skill_text.push(this.skill_text.length)
+    this.star_array = []
+    for(let i=0;i<this.skill_text.length;i++){
+      let start_value = ['star_border','star_border','star_border','star_border','star_border']
+      this.star_array.push(start_value)
+    }
+  }
+
   ngOnInit(){
+    for(let i=1990;i<2090;i++){
+      this.year_array.push(i)
+    }
     for(let i=0;i<this.skill_text.length;i++){
       let start_value = ['star_border','star_border','star_border','star_border','star_border']
       this.star_array.push(start_value)
@@ -60,7 +79,6 @@ export class homecomponent implements OnInit{
     }
   }
 
-
   number_of_entries:any = [1];
   interest_entries:any = [1];
   education_entries:any = [1];
@@ -78,22 +96,49 @@ export class homecomponent implements OnInit{
     this.interest_entries.splice(value,1)
     console.log(this.interest_entries)
   }
-  
-  @ViewChild('content') content!: ElementRef;
+
+  @ViewChild('content')
+  container!: ElementRef;
+
   button_dis:boolean = true;
   pdf_generator(value:any){
-    let data:any = document.getElementById(value);
     this.button_dis = (!this.button_dis)
-    html2canvas(data).then(canvas => {
-      const contentDataURL = canvas.toDataURL('image/png')  
-      let pdf = new jspdf.jsPDF();
-      let options = {
-        pagesplit: true
-      };
-      console.log(this.button_dis)
-      pdf.addImage(contentDataURL, 'JPEG', 0, 0, 208, canvas.height*208/canvas.width);
-      // pdf.save('a4.pdf');
-    });
+    setTimeout(() => {
+      if(!this.button_dis){
+        let data:any = document.getElementById(value)
+        let convas_width = this.container.nativeElement.offsetWidth;
+        let convas_height = this.container.nativeElement.offsetHeight;
+        let options = {
+          // pagesplit: true
+        };
+        html2canvas(data).then(canvas => {
+          let contentDataURL = canvas.toDataURL('jpeg',1)
+          // let pdf = new jspdf.jsPDF('p', 'mm', [297, 210]);
+          // pdf.addImage(contentDataURL, 'jpeg', 0, 0, 0, 0);
+          // pdf.save('a4.pdf');
+          let docDefinition = {
+            content: [{
+              image: contentDataURL,
+              width: 500,
+            }]
+          };
+          pdfMake.createPdf(docDefinition).download("Score_Details.pdf");
+        });
+      }
+    }, 1000);
+  }
+  
+  imgurl:any = "../../assets/img_leave/User Image.png";
+  upload_photo:boolean = false;
+  onSelectFile(event:any) {
+    if (event.target.files && event.target.files[0]) {
+      let reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event) => {
+        this.upload_photo = true;
+        this.imgurl = event.target?.result;
+      }
+    }
   }
 }
 

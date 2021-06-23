@@ -32,35 +32,26 @@ button{
         }
         background-color: #b8b3ae5d;
         width: 35vw;
-        .upper_round{
-            width: 35vw;
-            height: 100px;
-            background-color: blueviolet;
-            border-bottom-right-radius: 40%;
-            border-bottom-left-radius: 40%;
-            padding-top: 20px;
-            margin-bottom: 60px;
-            border-bottom: 10px solid blue;
-            .user_name{
-                text-align: center;
-                color: white;
-            }
-            .user_img{
-                margin-top: 30px;
-                display: flex;
-                justify-content: center;
-                .img{
-                    border: 5px solid white;
-                    border-radius: 50%;
-                }
+        padding-top: 20px;
+        .user_name{
+            text-align: center;
+        }
+        .user_img{
+            margin-top: 25px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            .img{
+                width: 20vw;
+                height: 20vw;
+                border: 0;
+                border-radius: 50%;
             }
         }
     }
     .right_side{
         width: 65vw;
-        padding-left: 5vw;
-        padding-right: 5vw;
-        padding-top: 40px;
+        padding: 0px 20px 40px 20px;
         .work_exp_and_work{
             *{
                 border: 0ch;
